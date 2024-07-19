@@ -13,15 +13,12 @@ return new class extends Migration {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullOnDelete();
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->string('name')->nullable();
             $table->mediumText('description')->nullable();
             $table->integer('count')->nullable();
             $table->integer('price')->nullable();
-            $table->float('status')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
-
-
         });
     }
 

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Models;
-namespace App\Models\Product;
+
+// namespace App\Models\Product;
 
 use App\Enums\ProductStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,16 +24,21 @@ class Product extends Model
         'status' => ProductStatus::class
     ];
 
-    public function user(): BelongTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function reviews(): HasMany
+    public function reviews()
     {
         return $this->hasMany(ProductReview::class);
     }
-    public function images(): HasMany
+    public function images()
     {
-        return $this->hasMany(ProductImage::class);
+        return $this->hasMany(ProductImage::class)->select('path');
+    }
+
+    public function rating(): int|float
+    {
+        return $this->reviews()->avg('rating');
     }
 }

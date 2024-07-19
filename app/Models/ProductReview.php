@@ -18,7 +18,7 @@ class ProductReview extends Model
     protected $casts = [
         'rating' => 'int'
     ];
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('product_reviews', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->foreignId('products_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('product_id')->nullable()->constrained()->cascadeOnDelete();
             $table->mediumText('text')->nullable();
             $table->integer('rating')->nullable();
             $table->timestamps();
@@ -28,3 +28,4 @@ return new class extends Migration {
         Schema::dropIfExists('product_reviews');
     }
 };
+?>

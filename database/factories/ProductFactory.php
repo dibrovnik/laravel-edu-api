@@ -2,27 +2,24 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
 use App\Enums\ProductStatus;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
- */
 class ProductFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    protected $model = Product::class;
+
+    public function definition()
     {
         return [
-            'name' => fake()->sentence(),
-            'description' => fake()->text,
-            'count' => fake()->randomNumber(),
-            'price' => fake()->randomFloat(),
-            'status' => fake()->randomElement([ProductStatus::Draft, ProductStatus::Published]),
+            'user_id' => User::factory(),
+            'name' => $this->faker->word,
+            'description' => $this->faker->paragraph,
+            'count' => $this->faker->numberBetween(1, 100),
+            'price' => $this->faker->numberBetween(100, 1000),
+            'status' => $this->faker->randomElement([ProductStatus::Draft, ProductStatus::Published]),
         ];
     }
 }
